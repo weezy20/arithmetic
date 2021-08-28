@@ -3,7 +3,6 @@
 //! or a number like `Num(23.23_f64)`
 
 use std::iter::Peekable;
-use std::ops::Add;
 use std::str::Chars;
 /// We can store the input arithmetic expression as a string slice, since
 /// we don't require ownership for the duration of processing.
