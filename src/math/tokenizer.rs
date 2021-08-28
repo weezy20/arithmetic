@@ -2,8 +2,6 @@
 //! Reads one or more characters from expression and create a
 //! or a number like `Num(23.23_f64)`
 
-use std::collections::binary_heap::Iter;
-use std::fs::OpenOptions;
 use std::iter::Peekable;
 use std::ops::Add;
 use std::str::Chars;
