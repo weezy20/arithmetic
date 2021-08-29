@@ -1,7 +1,7 @@
 #![cfg(test)]
 #[allow(unused, unused_mut)]
-use crate::math::tokenizer::{Token, Tokenizer};
-
+use crate::math::tokenizer::Tokenizer;
+use crate::math::token::Token;
 #[test]
 fn test_tokenizer() {
     use Token::*;

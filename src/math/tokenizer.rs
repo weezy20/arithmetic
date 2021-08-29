@@ -15,27 +15,7 @@ pub struct Tokenizer<'expression> {
     // expr: &'input str,
     expr: Peekable<Chars<'expression>>,
 }
-#[derive(PartialEq, Debug, Clone, Copy)]
-pub enum Token {
-    /// `+`  Addition
-    Add,
-    /// `*`  Multiplication
-    Mul,
-    /// `/`  Division
-    Div,
-    /// `-`  Subtraction
-    Sub,
-    /// `^` Exponentiation
-    Exp,
-    /// `(` Open Parentheses
-    OpenParen,
-    /// `)` Close Parentheses
-    CloseParen,
-    /// Number
-    Num(f64),
-    /// Invalid token
-    Invalid,
-}
+use super::token::Token;
 
 impl<'a> Tokenizer<'a> {
     /// Build a Tokenizer instance from raw string input
@@ -82,8 +62,8 @@ impl<'a> Iterator for Tokenizer<'a> {
                                 // Something went wrong here
                                 // must end parsing
                                 look_next = false;
-                                println!("Multiple decimal points!");
-                                println!("Number scanned upto: {:?}" , number);
+                                // println!("Multiple decimal points!");
+                                // println!("Number scanned upto: {:?}" , number);
                             }
                         }
                         Some('0'..='9') => {
@@ -94,7 +74,7 @@ impl<'a> Iterator for Tokenizer<'a> {
                         }
                         Some(t) => {
                             // Unrecognized char
-                            println!("Unrecognized token: {:?}", t);
+                            // println!("Unrecognized token: {:?}", t);
                             look_next = false;
                         }
                     } // End of peeking
