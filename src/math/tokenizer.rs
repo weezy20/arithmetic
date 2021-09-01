@@ -24,6 +24,12 @@ impl<'a> Tokenizer<'a> {
         Self { expr }
     }
 }
+#[macro_export]
+macro_rules! token_build {
+    ($e:expr) => {{
+        Tokenizer::new(&$e)
+    }};
+}
 
 impl<'a> Iterator for Tokenizer<'a> {
     type Item = Token;
@@ -84,7 +90,7 @@ impl<'a> Iterator for Tokenizer<'a> {
                 if let Ok(number) = number {
                     Some(Token::Num(number))
                 } else {
-                    None
+                    Some(Token::Invalid)
                 }
             } // End of Number tokenizer
             Some('+') => Some(Token::Add),
@@ -94,13 +100,14 @@ impl<'a> Iterator for Tokenizer<'a> {
             Some('^') => Some(Token::Exp),
             Some('(') => Some(Token::OpenParen),
             Some(')') => Some(Token::CloseParen),
+            // Return None only on EOF. This detail becomes crucial in our parser new() implementation
             None => None,
-            // None => Some(Token::EOF),
-            // This is bad design. Iterators should end with a None
-            // not a Some. For example if it was Some(Token::EOF)
-            // and you were using a for loop to iterate over Tokernizer
-            // the loop would never end
-            _ => Some(Token::Invalid),
+            // None => None, If we were sticking with conventional Iterator impls. But here 
+            // Warning: Do not use tokenizer in for loops. `next()` never returns `None`
+            Some(invalid) => {
+                // println!("{:?}", invalid);
+                Some(Token::Invalid)
+            }
         };
         token
     } // end of next()

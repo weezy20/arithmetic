@@ -19,4 +19,7 @@ pub enum Token {
     Num(f64),
     /// Invalid token
     Invalid,
+    // End of expression
+    // EOF,
 }
+

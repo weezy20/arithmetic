@@ -4,6 +4,6 @@
 
 pub mod ast;
 pub mod parser;
+mod test;
 pub mod token;
 pub mod tokenizer;
-mod test;
