@@ -20,12 +20,7 @@ pub enum NodeKind {
 }
 
 impl Node {
-    pub fn new(
-        kind: NodeKind,
-        val: Token,
-        left: RefNode,
-        right:RefNode,
-    ) -> Self {
+    pub fn new(kind: NodeKind, val: Token, left: RefNode, right: RefNode) -> Self {
         Node {
             kind,
             val,
