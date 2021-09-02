@@ -1,8 +1,8 @@
 #![allow(unused)]
 mod math;
+use math::ast::*;
 use math::parser::{ParseError, Parser};
 use math::{token::Token, tokenizer::Tokenizer};
-use math::ast::*;
 use std::io::Write;
 fn main() -> Result<(), ParseError> {
     let quit = "quitexit";
@@ -26,8 +26,13 @@ fn main() -> Result<(), ParseError> {
         // println!("\n****************************");
         let mut parser = Parser::new(&buf)?;
         let mut ast = parser.parse()?;
-        println!("Printing Abstract syntax tree:");
-        println!("{:#?}", ast);
+        // println!("Printing Abstract syntax tree:");
+        // println!("{:#?}", ast);
+        if let Some(result) = ast.eval() {
+            println!("Result : {}", result);
+        } else {
+            println!("Oops something went wrong :(");
+        };
     }
     Ok(())
 }
